@@ -196,11 +196,6 @@ function showMainWindow() {
     'autoHideMenuBar': !init.restore('showMenu', true),
     'icon': ICON_PATH,
     'show': false,
-    'webPreferences': {
-      'backgroundThrottling': false,
-      'nodeIntegration': false,
-      'preload': PRELOAD_JS,
-    },
   });
 
   if (init.restore('fullscreen', false)) {
@@ -232,7 +227,7 @@ function showMainWindow() {
     return cb(-3);
   });
 
-  main.loadURL(SPLASH_HTML);
+  main.loadURL('file://' + __dirname + '/html/app.html');
 
   if (argv.devtools) {
     main.webContents.openDevTools();
