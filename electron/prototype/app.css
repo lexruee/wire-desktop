@@ -1,0 +1,58 @@
+body {
+  display: flex;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: -apple-system, ".SFNSText-Regular", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+}
+
+webview {
+  width: 100%;
+  height: 100%;
+}
+
+.tabbar {
+  background-color: black;
+  width: 72px;
+  height: 100%;
+  flex: 0 0 auto;
+  padding-top: 40px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.tabbar-account-add {
+  margin-bottom: 16px;
+}
+
+.tabbar-button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.tabbar-button + .tabbar-button {
+  margin-top: 16px;
+}
+
+.tabbar-account-list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+#content {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}

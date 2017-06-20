@@ -227,7 +227,7 @@ function showMainWindow() {
     return cb(-3);
   });
 
-  main.loadURL('file://' + __dirname + '/html/app.html');
+  main.loadURL('file://' + __dirname + '/prototype/app.html');
 
   if (argv.devtools) {
     main.webContents.openDevTools();
@@ -243,32 +243,6 @@ function showMainWindow() {
       main.show();
     }, 800);
   }
-
-  main.webContents.on('will-navigate', function(event, url) {
-    // Prevent links like www.wire.com without blank target:
-    // to be opened inside the wrapper
-    if (util.openInExternalWindow(url)) {
-      event.preventDefault();
-      shell.openExternal(url);
-      return;
-    }
-
-    // Prevent Redirect for Drag and Drop on embeds
-    // or when no internet is present
-    if (url.includes('file://')) {
-      event.preventDefault();
-    }
-
-    // Resize the window for auth
-    if (url.includes('/auth/')) {
-      util.resizeToSmall(main);
-    }
-  });
-
-  main.webContents.on('new-window', function(event, url) {
-    event.preventDefault();
-    shell.openExternal(url);
-  });
 
   main.webContents.on('dom-ready', function() {
     main.webContents.insertCSS(fs.readFileSync(WRAPPER_CSS, 'utf8'));
