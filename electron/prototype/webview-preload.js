@@ -20,7 +20,7 @@
 'use strict';
 
 const {remote, ipcRenderer, webFrame, desktopCapturer} = require('electron');
-const {app} = remote;
+const {app, webContents} = remote;
 
 webFrame.setZoomLevelLimits(1, 1);
 webFrame.registerURLSchemeAsBypassingCSP('file');
@@ -29,13 +29,8 @@ webFrame.registerURLSchemeAsBypassingCSP('file');
 const _setImmediate = setImmediate;
 process.once('loaded', function() {
   global.setImmediate = _setImmediate;
-  global.desktopCapturer = desktopCapturer;
-  window.openGraph = require('../js/lib/openGraph');
 });
 
-///////////////////////////////////////////////////////////////////////////////
-// Addressbook
-///////////////////////////////////////////////////////////////////////////////
 let cachedAddressBook;
 
 function getAdressBook () {
@@ -46,6 +41,11 @@ function getAdressBook () {
 }
 
 if (process.platform === 'darwin') {
-  Object.defineProperty(window, 'wAddressBook', {get: getAdressBook});
+  //Object.defineProperty(window, 'wAddressBook', {get: getAdressBook});
 }
+
+debugger
+const openGraph = require('../js/lib/openGraph')
+Object.defineProperty(window, 'desktopCapturer', desktopCapturer)
+Object.defineProperty(window, 'openGraph', openGraph)
 
