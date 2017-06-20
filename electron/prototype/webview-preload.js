@@ -44,7 +44,6 @@ if (process.platform === 'darwin') {
   //Object.defineProperty(window, 'wAddressBook', {get: getAdressBook});
 }
 
-const openGraph = require('../js/lib/openGraph')
-Object.defineProperty(window, 'desktopCapturer', desktopCapturer)
-Object.defineProperty(window, 'openGraph', openGraph)
+window.desktopCapturer = desktopCapturer
+window.openGraph =  require('../js/lib/openGraph')
 
