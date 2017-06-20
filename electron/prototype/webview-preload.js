@@ -27,11 +27,13 @@ webFrame.registerURLSchemeAsBypassingCSP('file');
 
 // https://github.com/electron/electron/issues/2984
 const _setImmediate = setImmediate;
-process.once('loaded', function() {
+
+function onLoad() {
   global.setImmediate = _setImmediate;
   global.desktopCapturer = desktopCapturer;
   window.openGraph = require('../js/lib/openGraph');
-});
+  window.removeEventListener('DOMContentLoaded', onLoad);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Addressbook
@@ -49,3 +51,8 @@ if (process.platform === 'darwin') {
   Object.defineProperty(window, 'wAddressBook', {get: getAdressBook});
 }
 
+if (document.readyState === 'complete') {
+  onLoad();
+} else {
+  window.addEventListener('DOMContentLoaded', onLoad);
+}
