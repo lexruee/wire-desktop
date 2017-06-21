@@ -1,13 +1,13 @@
-const {shell} = require('electron');
+const {shell, webContents} = require('electron');
 const url = require('url');
 const {openInExternalWindow} = require('../js/util');
 
 module.exports = {
   createWebview(id) {
+    console.log('createWebview', id)
     const webview = document.createElement('webview');
     webview.src = 'http://wire-webapp-dev.zinfra.io/';
     webview.partition = `persist:${id}`;
-    webview.style.display = 'none';
     webview.preload = './webview-preload.js';
 
     webview.addEventListener('new-window', (event) => {
@@ -27,7 +27,7 @@ module.exports = {
     });
 
     webview.addEventListener('dom-ready', () => {
-      webview.openDevTools();
+      // webview.openDevTools();
     });
 
     return webview;

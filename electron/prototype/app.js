@@ -1,33 +1,16 @@
 const {createWebview} = require('./webview');
+const JSONStore = require('./account-store');
 
-let webviewsCounter = 0;
-let selectedWebviewIndex;
+// init storage
+let store = new JSONStore('accounts', {
+  accounts: []
+})
 
-function handleTabBarButtonClick(event) {
-  selectedWebviewIndex = parseInt(event.target.innerHTML, 10);
-  updateWebviews();
-}
+// load accounts
+let accounts = store.get('accounts')
 
-function updateList() {
-  const list = document.querySelector('.tabbar-account-list');
-
-  list.innerHTML = '';
-
-  for (view of new Array(webviewsCounter).keys()) {
-    const button = document.createElement('div');
-    button.className = 'tabbar-button';
-    button.innerHTML = view;
-    button.addEventListener('click', handleTabBarButtonClick);
-    list.appendChild(button);
-  }
-}
-
-function updateWebviews() {
-  const webviews = document.querySelectorAll('webview');
-  Array.from(webviews).forEach((view, index) => {
-    view.style.display = index === selectedWebviewIndex ? '' : 'none'; // TODO: use hide class
-  });
-}
+// set current account
+let selectedWebviewIndex = accounts[0] && accounts[0].session
 
 function addDragRegion() {
   if (process.platform === 'darwin') {
@@ -38,18 +21,77 @@ function addDragRegion() {
   }
 }
 
-document.querySelector('.tabbar-account-add').onclick = () => {
-  const webview = createWebview(webviewsCounter);
+function handleTabBarButtonClick(event) {
+  selectedWebviewIndex = event.target.session;
+  updateWebviews();
+  updateList();
+}
+
+function updateList() {
+  const list = document.querySelector('.tabbar-account-list');
+
+  list.innerHTML = '';
+
+  for (account of accounts) {
+    const button = document.createElement('div');
+    button.className = 'tabbar-button';
+    button.innerHTML = 'A';
+    button.session = account.session;
+    button.addEventListener('click', handleTabBarButtonClick);
+    button.classList.toggle('tabbar-button-active', account.session === selectedWebviewIndex)
+    list.appendChild(button);
+  }
+}
+
+function initiateWebviews() {
+  for (account of accounts) {
+    console.log('initiateWebviews', account.session)
+    addWebview(account.session)
+  }
+}
+
+function addWebview(session) {
+  console.log('addWebview', session)
+  const webview = createWebview(session);
+  const content = document.getElementById('content');
+  content.appendChild(webview);
+}
+
+function updateWebviews() {
+  [...document.querySelectorAll('webview')].forEach((view, index) => {
+    const session = parseInt(view.partition.split(':')[1]);
+    view.classList.toggle('hide', session !== selectedWebviewIndex)
+  });
+}
+
+function addAccount() {
+  let session = Date.now()
+  const webview = createWebview(session);
   const content = document.getElementById('content');
   content.appendChild(webview);
 
-  selectedWebviewIndex = webviewsCounter;
-  webviewsCounter++;
+  selectedWebviewIndex = session;
+
+  let account = {
+    session
+  }
+
+  accounts.push(account)
+  store.set('accounts', accounts)
 
   updateList();
   updateWebviews();
-};
+}
+
 
 document.addEventListener('DOMContentLoaded', (event) => {
   addDragRegion()
+
+  // init listeners
+  document.querySelector('.tabbar-account-add').addEventListener('click', addAccount);
+
+  // render accounts
+  updateList()
+  initiateWebviews()
+  updateWebviews()
 })
