@@ -25,7 +25,6 @@ class JSONStore {
 }
 
 function persistDataFile(filePath, data) {
-  debugger
   try {
     fs.writeFileSync(filePath, JSON.stringify(data));
   } catch(error) {

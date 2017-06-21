@@ -279,7 +279,6 @@ function showMainWindow() {
   main.webContents.on('crashed', function() {
     main.reload();
   });
-
 }
 
 function showAboutWindow() {
