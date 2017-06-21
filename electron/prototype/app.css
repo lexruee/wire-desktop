@@ -11,6 +11,10 @@ webview {
   height: 100%;
 }
 
+webview.hide {
+  visibility: hidden;
+}
+
 .drag-region {
   position: fixed;
   width: 100%;
@@ -28,13 +32,13 @@ webview {
   width: 72px;
   height: 100%;
   flex: 0 0 auto;
-  padding-top: 40px;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
 .tabbar-account-add {
+  margin-top: 40px;
   margin-bottom: 16px;
 }
 

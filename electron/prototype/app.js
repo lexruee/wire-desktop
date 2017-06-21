@@ -29,6 +29,15 @@ function updateWebviews() {
   });
 }
 
+function addDragRegion() {
+  if (process.platform === 'darwin') {
+    // add titlebar ghost to prevent interactions with the content while dragging
+    const titleBar = document.createElement('div');
+    titleBar.className = 'drag-region';
+    document.body.appendChild(titleBar);
+  }
+}
+
 document.querySelector('.tabbar-account-add').onclick = () => {
   const webview = createWebview(webviewsCounter);
   const content = document.getElementById('content');
@@ -40,3 +49,7 @@ document.querySelector('.tabbar-account-add').onclick = () => {
   updateList();
   updateWebviews();
 };
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  addDragRegion()
+})
