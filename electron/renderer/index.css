@@ -1,22 +1,19 @@
 body {
-  display: flex;
   margin: 0;
   height: 100vh;
   width: 100vw;
   font-family: -apple-system, ".SFNSText-Regular", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
 }
 
-webview {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;  
-  height: 100%;
+#root {
+    width: 100%;
+    height: 100%;
 }
 
-webview.hide {
-  width: 0;
-  height: 0;
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
 }
 
 .drag-region {
@@ -31,7 +28,8 @@ webview.hide {
   z-index: 1000000;
 }
 
-.tabbar {
+
+.sidebar {
   background-color: black;
   width: 76px;
   padding-top: 40px;
@@ -41,12 +39,11 @@ webview.hide {
   flex-direction: column;
 }
 
-.tabbar-account-add {
+.sidebar-button-account-add {
   margin-top: 16px;
-  margin-bottom: 16px;
 }
 
-.tabbar-button {
+.sidebar-button {
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -59,15 +56,15 @@ webview.hide {
   text-transform: uppercase;
 }
 
-.tabbar-button + .tabbar-button {
+.sidebar-button + .sidebar-button {
   margin-top: 16px;
 }
 
-.tabbar-button-active {
+.sidebar-button-active {
   color: red;
 }
 
-.tabbar-account-list {
+.sidebar-account-list {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -75,8 +72,29 @@ webview.hide {
   padding: 0;
 }
 
-#content {
+.webview-container {
   display: flex;
   position: relative;
   width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.webview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;  
+  height: 100%;
+}
+
+.webview webview {
+  width: 100%;  
+  height: 100%;
+}
+
+.webview.hide {
+  width: 0;  
+  height: 0;
+  overflow: hidden;
 }
