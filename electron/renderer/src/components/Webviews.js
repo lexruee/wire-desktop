@@ -14,7 +14,7 @@ const Webviews = ({ accounts, onAccountBadgeUpdate }) => (
                 onPageTitleUpdated={({title}) => {
                     let counter = (/\(([0-9]+)\)/).exec(title)
                     let count = parseInt(counter ? counter[1] : 0, 10);
-                    onAccountBadgeUpdate(count)
+                    onAccountBadgeUpdate(account.id, count)
                 }}
             />
         ))}

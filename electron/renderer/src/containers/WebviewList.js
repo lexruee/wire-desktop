@@ -11,8 +11,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAccountBadgeUpdate: (count) => {
-      dispatch(updateAccountBadge(count))
+    onAccountBadgeUpdate: (id, count) => {
+      dispatch(updateAccountBadge(id, count))
     }
   }
 }

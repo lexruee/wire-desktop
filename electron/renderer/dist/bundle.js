@@ -11305,9 +11305,10 @@ const switchAccount = id => {
 /* harmony export (immutable) */ __webpack_exports__["b"] = switchAccount;
 
 
-const updateAccountBadge = count => {
+const updateAccountBadge = (id, count) => {
   return {
     type: 'UPDATE_ACCOUNT_BADGE',
+    id,
     count
   };
 };
@@ -24987,8 +24988,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAccountBadgeUpdate: count => {
-      dispatch(__WEBPACK_IMPORTED_MODULE_1__actions__["c" /* updateAccountBadge */](count));
+    onAccountBadgeUpdate: (id, count) => {
+      dispatch(__WEBPACK_IMPORTED_MODULE_1__actions__["c" /* updateAccountBadge */](id, count));
     }
   };
 };
@@ -25021,7 +25022,7 @@ const Webviews = ({ accounts, onAccountBadgeUpdate }) => __WEBPACK_IMPORTED_MODU
         onPageTitleUpdated: ({ title }) => {
             let counter = /\(([0-9]+)\)/.exec(title);
             let count = parseInt(counter ? counter[1] : 0, 10);
-            onAccountBadgeUpdate(count);
+            onAccountBadgeUpdate(account.id, count);
         }
     }))
 );
@@ -25116,11 +25117,8 @@ const accounts = (state = [], action) => {
         badgeCount: 0
       }];
     case 'UPDATE_ACCOUNT_BADGE':
-      console.log('UPDATE_ACCOUNT_BADGE', action.count);
       return state.map(account => {
-        return _extends({}, account, {
-          badgeCount: action.count
-        });
+        return account.id === action.id ? _extends({}, account, { badgeCount: action.count }) : account;
       });
     case 'SWITCH_ACCOUNT':
       return state.map(account => {

@@ -16,10 +16,9 @@ const accounts = (state = [], action) => {
       }];
     case 'UPDATE_ACCOUNT_BADGE':
       return state.map(account => {
-        return {
-          ...account,
-          badgeCount: action.count
-        };
+        return (account.id === action.id)
+          ? { ...account, badgeCount: action.count }
+          : account
       });
     case 'SWITCH_ACCOUNT':
       return state.map(account => {
