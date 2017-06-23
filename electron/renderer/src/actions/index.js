@@ -12,10 +12,10 @@ export const switchAccount = id => {
   };
 };
 
-export const updateAccount = account => {
+export const updateAccountBadge = count => {
   return {
-    type: 'UPDATE_ACCOUNT',
-    account
+    type: 'UPDATE_ACCOUNT_BADGE',
+    count
   };
 };
 

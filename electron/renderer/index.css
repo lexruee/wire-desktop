@@ -64,6 +64,10 @@ body {
   color: red;
 }
 
+.sidebar-button-badge {
+  background-color: #c0c0c0;
+}
+
 .sidebar-account-list {
   display: flex;
   align-items: center;
@@ -84,11 +88,6 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;  
-  height: 100%;
-}
-
-.webview webview {
   width: 100%;  
   height: 100%;
 }
