@@ -1,8 +1,10 @@
+import uuid from 'uuid/v4'
+
 const accounts = (state = [], action) => {
   switch (action.type) {
     case 'ADD_ACCOUNT':
       return [...state, {
-        id: Date.now(), // TODO random id
+        id: uuid,
         teamID: undefined,
         userID: undefined,
         sessionID: action.sessionID,
