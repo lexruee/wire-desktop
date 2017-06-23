@@ -24943,25 +24943,29 @@ module.exports = bytesToUuid;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
 
+function classNames(account) {
+    return ["sidebar-button", account.visible ? 'sidebar-button-active' : '', account.badgeCount > 0 ? 'sidebar-button-badge' : ''].join(' ');
+}
+
 const Sidebar = ({ accounts, onAddAccountClick, onSwitchAccountClick }) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    "div",
-    { className: "sidebar" },
+    'div',
+    { className: 'sidebar' },
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "ul",
-        { className: "sidebar-account-list" },
+        'ul',
+        { className: 'sidebar-account-list' },
         accounts.map(account => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "div",
+            'div',
             {
                 key: account.id,
-                className: ["sidebar-button", account.visible ? 'sidebar-button-active' : '', account.badgeCount > 0 ? 'sidebar-button-badge' : ''].join(' '),
+                className: classNames(account),
                 onClick: () => onSwitchAccountClick(account.id) },
-            "A"
+            'A'
         ))
     ),
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "div",
-        { className: "sidebar-button sidebar-button-account-add", onClick: () => onAddAccountClick() },
-        "+"
+        'div',
+        { className: 'sidebar-button sidebar-button-account-add', onClick: () => onAddAccountClick() },
+        '+'
     )
 );
 

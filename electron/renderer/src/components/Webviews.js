@@ -2,7 +2,7 @@ import React from 'react';
 
 import Webview from './Webview'
 
-const Webviews = ({ accounts, onAccountBadgeUpdate }) => (
+const Webviews = ({ accounts, onAccountBadgeUpdate }) =>
     <ul className="webview-container">
         {accounts.map(account => (
             <Webview
@@ -19,6 +19,5 @@ const Webviews = ({ accounts, onAccountBadgeUpdate }) => (
             />
         ))}
     </ul>
-)
 
 export default Webviews
