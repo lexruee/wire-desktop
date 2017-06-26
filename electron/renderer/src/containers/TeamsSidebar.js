@@ -1,7 +1,6 @@
-import {connect} from 'react-redux'
-import uuid from 'uuid/v4'
+import { connect } from 'react-redux'
 
-import { addAccount, switchAccount } from '../actions'
+import { addAccountWithSession, switchAccount } from '../actions'
 import Sidebar from '../components/Sidebar'
 
 const mapStateToProps = (state) => {
@@ -13,7 +12,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onAddAccountClick: () => {
-      dispatch(addAccount(uuid()))
+      dispatch(addAccountWithSession())
     },
     onSwitchAccountClick: (id) => {
       dispatch(switchAccount(id))

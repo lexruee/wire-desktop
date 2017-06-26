@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+
+import './Webview.css'
 
 class Webview extends Component {
     constructor(props) {
@@ -9,14 +11,13 @@ class Webview extends Component {
     }
 
     componentDidMount() {
-        const {src, partition, preload} = this.props
+        const {src, partition} = this.props
 
         // set unknown props
         // see: https://facebook.github.io/react/warnings/unknown-prop.html
         // see: https://github.com/electron/electron/issues/6046
-        this.webview.partition = partition
+        this.webview.partition = partition ? `persist:${partition}` : ''
         this.webview.src = src
-        this.webview.preload = preload
 
         this.webview.addEventListener('page-title-updated', this._onPageTitleUpdated)
     }
@@ -26,8 +27,8 @@ class Webview extends Component {
     }
 
     render() {
-        const {className} = this.props
-        return <webview className={className} ref={(webview) => { this.webview = webview; }} />
+        const {className, preload} = this.props
+        return <webview className={className} preload={preload} ref={(webview) => { this.webview = webview; }} />
     }
 }
 

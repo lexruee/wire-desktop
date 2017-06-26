@@ -3,6 +3,6 @@ import accounts from './accounts'
 
 const appStore = combineReducers({
   accounts
-});
+})
 
-export default appStore;
+export default appStore
