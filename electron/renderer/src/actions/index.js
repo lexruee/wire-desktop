@@ -59,6 +59,7 @@ export const abortAccountCreation = (id) => {
     dispatch(switchAccount(lastAccount.id))
   }
 }
+
 export const updateAccountData = (id, data) => {
   return (dispatch, getState) => {
     const isValidAccountData = verifyObjectProperties(data, {
@@ -72,7 +73,19 @@ export const updateAccountData = (id, data) => {
     if (isValidAccountData) {
       dispatch(updateAccount(id, data))
     } else {
-      console.warn(`Got invalid account data ${JSON.stringify(data)}`)
+      console.warn(`Got invalid account data: ${JSON.stringify(data)}`)
+    }
+  }
+}
+
+export const deleteTeam = (teamID) => {
+  return (dispatch, getState) => {
+    const account = getState().accounts.find((account) => account.teamID === teamID)
+
+    if (account !== undefined) {
+      dispatch(deleteAccount(account.id))
+    } else {
+      console.warn(`Got invalid teamID: ${teamID}`)
     }
   }
 }

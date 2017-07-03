@@ -41,6 +41,10 @@ function subscribeToWebappEvents() {
     ipcRenderer.sendToHost('team-info', info)
   });
 
+  amplify.subscribe(z.event.WebApp.TEAM.DELETE, function(teamID) {
+    ipcRenderer.sendToHost('team-delete', teamID)
+  });
+
   amplify.subscribe(z.event.WebApp.LIFECYCLE.RESTART, function(update_source) {
     if (update_source === z.announce.UPDATE_SOURCE.DESKTOP) {
       ipcRenderer.send('wrapper-restart');
