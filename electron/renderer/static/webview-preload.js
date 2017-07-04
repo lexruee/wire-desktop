@@ -38,7 +38,7 @@ function subscribeToWebappEvents() {
   });
 
   amplify.subscribe(z.event.WebApp.TEAM.INFO, function(info) {
-    ipcRenderer.sendToHost('team-info', info)
+    ipcRenderer.sendToHost('team-info', info);
   });
 
   amplify.subscribe(z.event.WebApp.LIFECYCLE.RESTART, function(update_source) {
@@ -191,12 +191,12 @@ function enableFileLogging() {
       .info(pkg.productName, 'Version', pkg.version);
 
   } catch (error) {
-    console.error(`Failed to create log file: ${error.message}`)
+    console.error(`Failed to create log file: ${error.message}`);
   }
 }
 
 function updateWebappStyles() {
-  document.body.classList.add('team-mode')
+  document.body.classList.add('team-mode');
 }
 
 function checkAvailablity(callback) {
@@ -204,7 +204,7 @@ function checkAvailablity(callback) {
     if (window.wire) {
       clearInterval(intervalId);
       callback();
-      return
+      return;
     }
 
     if (navigator.onLine) {
@@ -220,21 +220,21 @@ const _setImmediate = setImmediate;
 process.once('loaded', () => {
   global.setImmediate = _setImmediate;
   global.desktopCapturer = desktopCapturer;
-  global.openGraph = require('../../js/lib/openGraph')
-  global.notification_icon = path.join(app.getAppPath(), 'img', 'notification.png')
-  exposeAddressbook()
-  exposeLibsodiumNeon()
-  enableFileLogging()
-})
+  global.openGraph = require('../../js/lib/openGraph');
+  global.notification_icon = path.join(app.getAppPath(), 'img', 'notification.png');
+  exposeAddressbook();
+  exposeLibsodiumNeon();
+  enableFileLogging();
+});
 
 window.addEventListener('DOMContentLoaded', () => {
   checkAvailablity(() => {
-    subscribeToMainProcessEvents()
-    updateWebappStyles()
-    subscribeToWebappEvents()
-    replaceGoogleAuth()
+    subscribeToMainProcessEvents();
+    updateWebappStyles();
+    subscribeToWebappEvents();
+    replaceGoogleAuth();
 
     // include context menu
-    require('../../js/menu/context')
-  })
+    require('../../js/menu/context');
+  });
 });
