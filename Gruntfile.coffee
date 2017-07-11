@@ -156,7 +156,7 @@ module.exports = (grunt) ->
         exe: '<%= info.nameInternal %>.exe'
         setupIcon: 'resources/win/wire.internal.ico'
         noMsi: true
-        loadingGif: 'resources/win/icon.internal.256x256.png'
+        loadingGif: 'resources/win/icon.internal.256x256.gif'
         iconUrl: 'https://wire-app.wire.com/win/internal/wire.internal.ico'
       prod:
         title: '<%= info.name %>'
@@ -168,7 +168,7 @@ module.exports = (grunt) ->
         exe: '<%= info.name %>.exe'
         setupIcon: 'resources/win/wire.ico'
         noMsi: true
-        loadingGif: 'resources/win/icon.256x256.png'
+        loadingGif: 'resources/win/icon.256x256.gif'
         iconUrl: 'https://wire-app.wire.com/win/prod/wire.ico'
 
     gitcommit:
